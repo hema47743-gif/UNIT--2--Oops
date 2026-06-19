@@ -1,0 +1,82 @@
+import java.util.Scanner;
+abstract class FoodItem {
+    String name;
+    FoodItem(String a) {
+        this.name = a;
+    }
+    abstract double calculatePrice();
+    public void displayItem() {
+        System.out.println("Item: " + name);
+        System.out.printf("Price: $%.1f\n", calculatePrice());
+        System.out.println();
+    }
+}
+class VegFood extends FoodItem {
+    private double basePrice;
+    VegFood(String a, double b) {
+        super(a);
+        this.basePrice = b;
+    }
+    double calculatePrice() {
+        return basePrice;
+    }
+}
+class NonVegFood extends FoodItem {
+    private double basePrice;
+    private double extraCharge;
+    NonVegFood(String a, double b, double c) {
+        super(a);
+        this.basePrice = b;
+        this.extraCharge = c;
+    }
+    double calculatePrice() {
+        return basePrice + extraCharge;
+    }
+}
+class ComboMeal extends FoodItem {
+    private double vegPrice;
+    private double nonVegPrice;
+    private double discount;
+    ComboMeal(String a, double d, double e, double f) {
+        super(a);
+        this.vegPrice = d;
+        this.nonVegPrice = e;
+        this.discount = f;
+    }
+    double calculatePrice() {
+        return vegPrice + nonVegPrice - discount;
+    }
+}
+public class OnlineFoodOrderingSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Veg Food Name: ");
+        String vegName = sc.nextLine();
+        System.out.print("Enter Veg Food Price: ");
+        double vegPrice = sc.nextDouble();
+        sc.nextLine();
+        VegFood v = new VegFood(vegName, vegPrice);
+        System.out.print("Enter Non-Veg Food Name: ");
+        String nonVegName = sc.nextLine();
+        System.out.print("Enter Non-Veg Food Base Price: ");
+        double nonVegPrice = sc.nextDouble();
+        System.out.print("Enter Extra Charge: ");
+        double extraCharge = sc.nextDouble();
+        sc.nextLine();
+        NonVegFood nv = new NonVegFood(nonVegName, nonVegPrice, extraCharge);
+        System.out.print("Enter Combo Meal Name: ");
+        String comboName = sc.nextLine();
+        System.out.print("Enter Veg Price in Combo: ");
+        double comboVeg = sc.nextDouble();
+        System.out.print("Enter Non-Veg Price in Combo: ");
+        double comboNonVeg = sc.nextDouble();
+        System.out.print("Enter Discount on Combo: ");
+        double comboDiscount = sc.nextDouble();
+        ComboMeal cd = new ComboMeal(comboName, comboVeg, comboNonVeg, comboDiscount);
+        System.out.println("\n--- Food Order Details ---\n");
+        v.displayItem();
+        nv.displayItem();
+        cd.displayItem();
+        sc.close();
+    }
+}
