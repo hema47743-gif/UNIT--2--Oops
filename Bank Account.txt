@@ -1,0 +1,107 @@
+import java.util.Scanner;
+class BankAccount {
+    private String accountNumber;
+    private String accountHolder;
+    private String accountType;
+    private String branchName;
+    private String ifscCode;
+    private double balance;
+    private String mobileNumber;
+    public void setAccountNumber(String a) {
+        this.accountNumber = a;
+    }
+    public void setAccountHolder(String b) {
+        this.accountHolder = b;
+    }
+    public void setAccountType(String c) {
+        this.accountType = c;
+    }
+    public void setBranchName(String d) {
+        this.branchName = d;
+    }
+    public void setIfscCode(String e) {
+        this.ifscCode = e;
+    }
+    public void setMobileNumber(String f) {
+        this.mobileNumber = f;
+    }
+    public void setBalance(double g) {
+        this.balance = g;
+    }
+        public String getAccountNumber() {
+        return accountNumber;
+    }
+    public String getAccountHolder() {
+        return accountHolder;
+    }
+    public String getAccountType() {
+        return accountType;
+    }
+    public String getBranchName() {
+        return branchName;
+    }
+    public String getIfscCode() {
+        return ifscCode;
+    }
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+    public double getBalance() {
+        return balance;
+    }
+       public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposit successful");
+        } else {
+            System.out.println("Invalid deposit amount");
+        }
+    }
+        public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrawal successful");
+        } else {
+            System.out.println("Invalid withdrawal amount");
+        }
+    }
+        public void displayDetails() {
+        System.out.println("Bank Account Details");
+        System.out.println("Account Number : " + getAccountNumber());
+        System.out.println("Account Holder : " + getAccountHolder());
+        System.out.println("Account Type : " + getAccountType());
+        System.out.println("Branch Name : " + getBranchName());
+        System.out.println("IFSC Code : " + getIfscCode());
+        System.out.println("Mobile Number : " + getMobileNumber());
+        System.out.printf("Balance : $%.1f\n",  getBalance());
+    }
+}
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        BankAccount p = new BankAccount();
+        System.out.print("Enter Account Number: ");
+        p.setAccountNumber(sc.nextLine());
+        System.out.print("Enter Account Holder Name: ");
+        p.setAccountHolder(sc.nextLine());
+        System.out.print("Enter Account Type: ");
+        p.setAccountType(sc.nextLine());
+        System.out.print("Enter Branch Name: ");
+        p.setBranchName(sc.nextLine());
+        System.out.print("Enter IFSC Code: ");
+        p.setIfscCode(sc.nextLine());
+        System.out.print("Enter Mobile Number: ");
+        p.setMobileNumber(sc.nextLine());
+        System.out.print("Enter Initial Balance: ");
+        p.setBalance(sc.nextDouble());
+        p.displayDetails();
+        System.out.println("Enter Deposit Amount: ");
+        double depositAmount = sc.nextDouble();
+        p.deposit(depositAmount);
+        System.out.println("Enter Withdrawal Amount: ");
+        double withdrawAmount = sc.nextDouble();
+        p.withdraw(withdrawAmount);
+        p.displayDetails();
+        sc.close();
+    }
+}
